@@ -1,0 +1,180 @@
+PRACTICAL QUESTION 1:
+
+mysql> create database Aparna;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> use Aparna;
+Database changed
+
+mysql> create table student(RollNo int primary key,Name varchar(100),Age int,course varchar(100),year int);
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> desc student;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| RollNo | int          | NO   | PRI | NULL    |       |
+| Name   | varchar(100) | YES  |     | NULL    |       |
+| Age    | int          | YES  |     | NULL    |       |
+| course | varchar(100) | YES  |     | NULL    |       |
+| year   | int          | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> alter table student add marks int;
+Query OK, 0 rows affected (0.22 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| RollNo | int          | NO   | PRI | NULL    |       |
+| Name   | varchar(100) | YES  |     | NULL    |       |
+| Age    | int          | YES  |     | NULL    |       |
+| course | varchar(100) | YES  |     | NULL    |       |
+| year   | int          | YES  |     | NULL    |       |
+| marks  | int          | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> insert into student(RollNo,Name,Age,course,year,marks)values(101,'Aparna',21,'MCA',2,80),(102,'gopika',21,'MCA',2,81);
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+
+
+mysql> insert into student(RollNo,Name,Age,course,year,marks)values(103,'vishnupriya',21,'MCA',2,80),(104,'Ashli',22,'MCA',2,81);
+Query OK, 2 rows affected (0.02 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into student(RollNo,Name,Age,course,year,marks)values(105,'Aiswarya',22,'MCA',2,80);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from student;
++--------+-------------+------+--------+------+-------+
+| RollNo | Name        | Age  | course | year | marks |
++--------+-------------+------+--------+------+-------+
+|    101 | Aparna      |   21 | MCA    |    2 |    80 |
+|    102 | gopika      |   21 | MCA    |    2 |    81 |
+|    103 | vishnupriya |   21 | MCA    |    2 |    80 |
+|    104 | Ashli       |   22 | MCA    |    2 |    81 |
+|    105 | Aiswarya    |   22 | MCA    |    2 |    80 |
++--------+-------------+------+--------+------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table student rename column year to course_duration;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from student;
++--------+-------------+------+--------+-----------------+-------+
+| RollNo | Name        | Age  | course | course_duration | marks |
++--------+-------------+------+--------+-----------------+-------+
+|    101 | Aparna      |   21 | MCA    |               2 |    80 |
+|    102 | gopika      |   21 | MCA    |               2 |    81 |
+|    103 | vishnupriya |   21 | MCA    |               2 |    80 |
+|    104 | Ashli       |   22 | MCA    |               2 |    81 |
+|    105 | Aiswarya    |   22 | MCA    |               2 |    80 |
++--------+-------------+------+--------+-----------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table student drop column Age;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from student;
++--------+-------------+--------+-----------------+-------+
+| RollNo | Name        | course | course_duration | marks |
++--------+-------------+--------+-----------------+-------+
+|    101 | Aparna      | MCA    |               2 |    80 |
+|    102 | gopika      | MCA    |               2 |    81 |
+|    103 | vishnupriya | MCA    |               2 |    80 |
+|    104 | Ashli       | MCA    |               2 |    81 |
+|    105 | Aiswarya    | MCA    |               2 |    80 |
++--------+-------------+--------+-----------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select Name,marks from student where course='MCA';
++-------------+-------+
+| Name        | marks |
++-------------+-------+
+| Aparna      |    80 |
+| gopika      |    81 |
+| vishnupriya |    80 |
+| Ashli       |    81 |
+| Aiswarya    |    80 |
++-------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> truncate table student;
+Query OK, 0 rows affected (0.16 sec)
+
+mysql> desc student;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| RollNo          | int          | NO   | PRI | NULL    |       |
+| Name            | varchar(100) | YES  |     | NULL    |       |
+| course          | varchar(100) | YES  |     | NULL    |       |
+| course_duration | int          | YES  |     | NULL    |       |
+| marks           | int          | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> drop table student;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> create table student(id int primary key);
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> desc student;
++-------+------+------+-----+---------+-------+
+| Field | Type | Null | Key | Default | Extra |
++-------+------+------+-----+---------+-------+
+| id    | int  | NO   | PRI | NULL    |       |
++-------+------+------+-----+---------+-------+
+1 row in set (0.00 sec)
+
+mysql> insert into student values(1),(2),(3),(4);
+Query OK, 4 rows affected (0.02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from student;
++----+
+| id |
++----+
+|  1 |
+|  2 |
+|  3 |
+|  4 |
++----+
+4 rows in set (0.01 sec)
+
+mysql> alter table student add Name varchar(50);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | NO   | PRI | NULL    |       |
+| Name  | varchar(50) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql> alter table student drop column Name;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++-------+------+------+-----+---------+-------+
+| Field | Type | Null | Key | Default | Extra |
++-------+------+------+-----+---------+-------+
+| id    | int  | NO   | PRI | NULL    |       |
++-------+------+------+-----+---------+-------+
+1 row in set (0.01 sec)
+
+mysql> drop table student;
+Query OK, 0 rows affected (0.07 sec)

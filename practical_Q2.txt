@@ -1,0 +1,97 @@
+PRACTICAL QUESTION 2:
+
+mysql> use Aparna;
+Database changed
+
+mysql> create table Department(Dept_Id int primary key,Dept_Name varchar(50),Dept_Head varchar(50));
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> create table Employee(Emp_Id int primary key,Emp_Name varchar(50),Dept_Id int,Salary float,foreign key(Dept_Id) references Department(Dept_Id));
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> desc Employee;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| Emp_Id   | int         | NO   | PRI | NULL    |       |
+| Emp_Name | varchar(50) | YES  |     | NULL    |       |
+| Dept_Id  | int         | YES  | MUL | NULL    |       |
+| Salary   | float       | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc Department;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| Dept_Id   | int         | NO   | PRI | NULL    |       |
+| Dept_Name | varchar(50) | YES  |     | NULL    |       |
+| Dept_Head | varchar(50) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into Department(Dept_Id,Dept_Name,Dept_Head) values (1,'Dept_A','Dept_HeadA'),(2,'Dept_B','Dept_HeadB'),(3,'Dept_C','Dept_HeadC'),(4,'Dept_D','Dept_HeadD');
+Query OK, 4 rows affected (0.02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> insert into Employee(Emp_Id,Emp_Name,Dept_Id,Salary) values (101,'EmpA',1,50000.00),(102,'EmpB',2,35000.00),(103,'EmpC',3,70000.00),(104,'EmpD',4,50000.00);
+Query OK, 4 rows affected (0.02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from Employee;
++--------+----------+---------+--------+
+| Emp_Id | Emp_Name | Dept_Id | Salary |
++--------+----------+---------+--------+
+|    101 | EmpA     |       1 |  50000 |
+|    102 | EmpB     |       2 |  35000 |
+|    103 | EmpC     |       3 |  70000 |
+|    104 | EmpD     |       4 |  50000 |
++--------+----------+---------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select * from Department;
++---------+-----------+------------+
+| Dept_Id | Dept_Name | Dept_Head  |
++---------+-----------+------------+
+|       1 | Dept_A    | Dept_HeadA |
+|       2 | Dept_B    | Dept_HeadB |
+|       3 | Dept_C    | Dept_HeadC |
+|       4 | Dept_D    | Dept_HeadD |
++---------+-----------+------------+
+4 rows in set (0.00 sec)
+
+mysql> update Employee set Salary=75000.25 where Emp_Id=104;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Employee where Emp_Id=104;
++--------+----------+---------+---------+
+| Emp_Id | Emp_Name | Dept_Id | Salary  |
++--------+----------+---------+---------+
+|    104 | EmpD     |       4 | 75000.2 |
++--------+----------+---------+---------+
+1 row in set (0.00 sec)
+
+mysql> delete from Employee where Emp_Id=103;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select *from Employee;
++--------+----------+---------+---------+
+| Emp_Id | Emp_Name | Dept_Id | Salary  |
++--------+----------+---------+---------+
+|    101 | EmpA     |       1 |   50000 |
+|    102 | EmpB     |       2 |   35000 |
+|    104 | EmpD     |       4 | 75000.2 |
++--------+----------+---------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select * from Employee join Department on Employee.Dept_Id = Department.Dept_Id;
++--------+----------+---------+---------+---------+-----------+------------+
+| Emp_Id | Emp_Name | Dept_Id | Salary  | Dept_Id | Dept_Name | Dept_Head  |
++--------+----------+---------+---------+---------+-----------+------------+
+|    101 | EmpA     |       1 |   50000 |       1 | Dept_A    | Dept_HeadA |
+|    102 | EmpB     |       2 |   35000 |       2 | Dept_B    | Dept_HeadB |
+|    104 | EmpD     |       4 | 75000.2 |       4 | Dept_D    | Dept_HeadD |
++--------+----------+---------+---------+---------+-----------+------------+
+3 rows in set (0.00 sec)
+
